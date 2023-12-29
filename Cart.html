@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="./style.css"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toggle Buttons Example</title>
+
+</head>
+<body>
+  <header>
+    <h1>Shopping Cart - Trym.e</h1>
+  </header>
+
+  <section>
+    <h2>Your Cart</h2>
+    <div class="cart-items" id="cart-items"></div>
+    <button id="empty-cart-btn" onclick="emptyCart()">Empty Cart</button>
+  </section>
+
+ 
+
+  <script>
+    var cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+    var cartItemsElement = document.getElementById('cart-items');
+    var emptyCartButton = document.getElementById('empty-cart-btn');
+
+    function updateCartDisplay() {
+      cartItemsElement.innerHTML = '';
+
+      if (cartItems.length > 0) {
+        cartItems.forEach(function (item) {
+          var cartItemElement = document.createElement('div');
+          cartItemElement.classList.add('cart-item');
+
+          var itemImage = document.createElement('img');
+          itemImage.src = getItemImageSrc(item); // Replace this with your logic to get the image source
+          itemImage.alt = item;
+
+          var itemName = document.createElement('p');
+          itemName.textContent = item;
+
+          cartItemElement.appendChild(itemImage);
+          cartItemElement.appendChild(itemName);
+
+          cartItemsElement.appendChild(cartItemElement);
+        });
+      } else {
+        var emptyCartElement = document.createElement('p');
+        emptyCartElement.textContent = 'Your cart is empty';
+        cartItemsElement.appendChild(emptyCartElement);
+      }
+    }
+
+    function emptyCart() {
+      localStorage.removeItem('cart');
+      cartItems = [];
+      updateCartDisplay();
+    }
+
+    // Replace this function with your logic to get the image source for each item
+    function getItemImageSrc(item) {
+      // Add your logic to map item names to image sources
+      // For example, you can use a switch statement or an object to store mappings
+      switch (item) {
+        case 'Hoodie':
+          return 'product1.jpg';
+        case 'Jacket':
+          return 'product2.jpg ';
+        case 'Cargo Trousers':
+          return 'product3.jpg ';
+          case 'Shirt':
+          return 'shirt.jpg';
+          case 'Oversized T-Shirts':
+          return 'oversized.jpg ';
+          case 'Jeans':
+          return 'jeans.jpg ';
+          case 'Product 1':
+          return 'top.jpg';
+          case 'Product 2':
+          return 'hoo.jpg ';
+          case 'Product 3':
+          return 'ts.jpg ';
+          case 'Product 4':
+          return 'sh.jpg ';
+          case 'Product 5':
+          return 'ov.jpg ';
+          case 'Product 6':
+          return 'sandal.jpg ';
+          case 'shoe1':
+            return 'shoe1';
+            case 'shoe2':
+            return 'shoe2';
+            case 'shoe3':
+            return 'shoe3';
+            case 'shoe4':
+            return 'shoe4';
+            case 'shoe5':
+            return 'shoe5';
+            case 'shoe6':
+            return 'shoe6';
+        default:
+          return 'default.jpg';
+      }
+    }
+
+    // Initial cart display
+    updateCartDisplay();
+  </script>
+
+</body>
+</html>
